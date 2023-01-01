@@ -1,12 +1,9 @@
 import express, { Application, Request, Response } from 'express';
-import * as dotenv from 'dotenv';
 
 import routes from './routes';
 
-dotenv.config();
-
 const app: Application = express();
-const PORT = process.env.PORT || 3121;
+const PORT = 3121;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
