@@ -14,7 +14,7 @@ prettier: `npm run prettier`
 ## example
 http://localhost:3121/images?filename=mouse&height=300&width=400&type=jpeg
 ### Query Params
->> filename: this is the name of the image <string> <br>
->> height: this is the height of the image <number> <br>
->> width: this is the width of the image <number> <br>
->> type <optional>: this is the type of resized image (e.g 'jpg', 'png', 'jpeg')
+> *filename*: this is the name of the image <string> <br>
+> *height*: this is the height of the image <number> <br>
+> *width*: this is the width of the image <number> <br>
+> *type* <optional>: this is the type of resized image (e.g 'jpg', 'png', 'jpeg')
