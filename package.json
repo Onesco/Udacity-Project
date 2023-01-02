@@ -7,7 +7,7 @@
     "test": "npm run build && npm run jasmine",
     "build": "npx tsc",
     "start": "npm run build && node build/index.js",
-    "dev": "nodemon src/index.ts",
+    "dev": "nodemon --ignore src/autoGens src/index.ts",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --config .prettierrc src/**/*.ts --write",
     "jasmine": "jasmine"

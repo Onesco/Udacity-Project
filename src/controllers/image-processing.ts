@@ -40,10 +40,7 @@ const imageProcessor = async (req: Request, res: Response) => {
     const w = width ? Number(width) : 400;
     const h = height ? Number(height) : 400;
     try {
-      const data = await sharp(imageUrl)
-        .resize(w, h)
-        .toFormat(format as AvailableFormatInfo, { palette: true })
-        .toBuffer();
+      const data = await utils.imageProcesor(format, imageUrl, w, h);
       // then write the new thumbnail to the file system
       utils.writeThumbNail(thumbnailUrl, data);
     } catch (error) {
