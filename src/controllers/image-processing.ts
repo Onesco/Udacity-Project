@@ -1,5 +1,4 @@
 import { Response, Request } from 'express';
-import sharp, { AvailableFormatInfo } from 'sharp';
 
 import utils from '../utils';
 
