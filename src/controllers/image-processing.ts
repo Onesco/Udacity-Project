@@ -13,7 +13,10 @@ import utils from '../utils';
 const imageProcessor = async (req: Request, res: Response) => {
   //  0. destructure all query parameters from the request query object
   const { filename, height, width, type } = req.query;
-  const format = type as unknown;
+  let format = type as unknown;
+  if (!type) {
+    format = 'jpg';
+  }
 
   // Create image url based on the given filename
   const imageUrl = utils.createImageUrl(`${filename}.jpg`);
@@ -36,13 +39,20 @@ const imageProcessor = async (req: Request, res: Response) => {
     // resize the image or set it 400 by 400
     const w = width ? Number(width) : 400;
     const h = height ? Number(height) : 400;
-    const data = await sharp(imageUrl)
-      .resize(w, h)
-      .toFormat(format as AvailableFormatInfo, { palette: true })
-      .toBuffer();
-
-    // then write the new thumbnail to the file system
-    utils.writeThumbNail(thumbnailUrl, data);
+    try {
+      const data = await sharp(imageUrl)
+        .resize(w, h)
+        .toFormat(format as AvailableFormatInfo, { palette: true })
+        .toBuffer();
+      // then write the new thumbnail to the file system
+      utils.writeThumbNail(thumbnailUrl, data);
+    } catch (error) {
+      return res
+        .status(403)
+        .send(
+          `can not process image of name ${filename} with dimension ${height} by ${width}`
+        );
+    }
   }
 
   // send the thumbnail file
